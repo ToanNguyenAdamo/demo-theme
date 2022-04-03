@@ -1,0 +1,57 @@
+:root {
+  // --bg-light: #ffffff;
+  // --text-primary: #005abd;
+  // --text-secondary: #97c6f8;
+  // --input-primary: #005abd;
+  // --input-secondary: #97c6f8;
+  // --btn-primary: #005abd;
+  // --btn-secondary: #97c6f8;
+  // --bg-success: #339900;
+  // --bg-warning: #ffcc00;
+  // --bg-error: #cc3300;
+}
+
+.background-light {
+  background-color: var(--bg-light);
+  color: var(--color-light);
+}
+.text-primary {
+  color: var(--text-primary);
+}
+.text-secondary {
+  color: var(--text-secondary);
+}
+.input-primary {
+  border-color: var(--input-primary) !important;
+}
+.input-secondary {
+  border-color: var(--input-secondary) !important;
+}
+.btn-primary {
+  background-color: var(--btn-primary);
+  border-color: #c7c6c6;
+  color: #ffffff;
+  // &:hover {
+  //   background-color: rgb(19, 92, 170);
+  // }
+  // &:active {
+  //   background-color: rgb(45, 86, 131);
+  // }
+}
+.btn-secondary {
+  background-color: var(--btn-secondary);
+  border-color: #c7c6c6;
+  color: #f2fc97;
+}
+.background-success {
+  background-color: var(--bg-success);
+  color: #ffffff;
+}
+.background-warning {
+  background-color: var(--bg-warning);
+  color: #ffffff;
+}
+.background-error {
+  background-color: var(--bg-error);
+  color: #ffffff;
+}
