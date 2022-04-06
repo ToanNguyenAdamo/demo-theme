@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ThemeService } from 'src/services/theme.service';
+import { environment } from 'src/environments/environment';
+import { light, ThemeService } from 'src/services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +9,17 @@ import { ThemeService } from 'src/services/theme.service';
   styleUrls: ['./app.component.sass'],
 })
 export class AppComponent {
+  env = environment;
+
   title = 'theme-demo';
-  currentTheme = 'Light';
+  currentTheme = 'Dark';
   isLoading = false;
   initialApp = true;
   constructor(private themeService: ThemeService) {}
 
   ngOnInit() {
+      // this.initialApp = false;
+
     this.lightTheme().subscribe((res) => {
       this.initialApp = false;
     });
@@ -24,7 +29,7 @@ export class AppComponent {
     this.currentTheme = this.currentTheme == 'Light' ? 'Dark' : 'Light';
     this.isLoading = true;
 
-    if (this.currentTheme == 'Light') {
+    if (this.currentTheme == 'Dark') {
       this.lightTheme().subscribe((res) => {
         this.isLoading = false;
       });

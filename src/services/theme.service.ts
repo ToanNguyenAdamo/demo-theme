@@ -1,11 +1,27 @@
 import { Injectable } from '@angular/core';
 import { delay, Observable, of, tap } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService {
+  styleElm: any;
   constructor() {}
+  appendStyle(properties: any) {
+    if (this.styleElm) {
+      this.styleElm.parentNode.removeChild(this.styleElm);
+    }
+    let colorVariables = '';
+    Object.keys(properties).forEach((property) => {
+      colorVariables += `${property} : ${properties[property]}; `;
+    });
+
+    this.styleElm = document.createElement('style');
+    this.styleElm.type = 'text/css';
+    this.styleElm.innerHTML = `.app-theme { ${colorVariables} }`;
+    document.getElementsByTagName('head')[0].appendChild(this.styleElm);
+  }
   light() {
     return this.setActiveTheme(light);
   }
@@ -16,9 +32,9 @@ export class ThemeService {
     return of(properties).pipe(
       delay(1000),
       tap((res: any) => {
-        Object.keys(res).forEach((property) => {
-          document.documentElement.style.setProperty(property, res[property]);
-        });
+        if (environment.production) {
+          this.appendStyle(res);
+        }
       })
     );
   }
@@ -29,52 +45,40 @@ export class ThemeService {
   getRamdomTheme() {
     const primary = this.getRamdomHex();
     const secondary = this.getRamdomHex();
+    const primaryBtnText = this.getRamdomHex();
+    const secondaryBtnText = this.getRamdomHex();
     const properties = {
-      '--bg-light': this.getRamdomHex(),
-      '--color-light': this.getRamdomHex(),
+      '--bg-color': this.getRamdomHex(),
+      '--text-color': this.getRamdomHex(),
       '--text-primary': primary,
       '--text-secondary': secondary,
-      '--input-primary': primary,
-      '--input-secondary': secondary,
       '--btn-primary': primary,
+      '--btn-primary-text': primaryBtnText,
       '--btn-secondary': secondary,
-      '--bg-success': this.getRamdomHex(),
-      '--bg-warning': this.getRamdomHex(),
-      '--bg-error': this.getRamdomHex(),
+      '--btn-secondary-text': secondaryBtnText,
     };
     return properties;
   }
 }
 
-export interface Theme {
-  name: string;
-  properties: any;
-}
-
 export const light = {
-  '--bg-light': '#ffffff',
-  '--color-light': '#1A1A40',
+  '--bg-color': '#ffffff',
+  '--text-color': '#1f1f1f',
   '--text-primary': '#005abd',
   '--text-secondary': '#97c6f8',
-  '--input-primary': '#005abd',
-  '--input-secondary': '#97c6f8',
-  '--btn-primary': '#005abd',
-  '--btn-secondary': '#97c6f8',
-  '--bg-success': '#339900',
-  '--bg-warning': '#ffcc00',
-  '--bg-error': '#cc3300',
+  '--btn-primary': '#4646f1',
+  '--btn-primary-text': '#ffffff',
+  '--btn-secondary': '#e2e9ff',
+  '--btn-secondary-text': '#2f2fe4',
 };
 
 export const dark = {
-  '--bg-light': '#1A1A40',
-  '--color-light': '#ffffff',
-  '--text-primary': '#7A0BC0',
-  '--text-secondary': '#FA58B6',
-  '--input-primary': '#7A0BC0',
-  '--input-secondary': '#FA58B6',
-  '--btn-primary': '#7A0BC0',
-  '--btn-secondary': '#FA58B6',
-  '--bg-success': '#4E9F3D',
-  '--bg-warning': '#ECB365',
-  '--bg-error': '#B3541E',
+  '--bg-color': '#000000',
+  '--text-color': '#ffffff',
+  '--text-primary': '#005abd',
+  '--text-secondary': '#97c6f8',
+  '--btn-primary': '#4646f1',
+  '--btn-primary-text': '#ffffff',
+  '--btn-secondary': '#e2e9ff',
+  '--btn-secondary-text': '#2f2fe4',
 };
