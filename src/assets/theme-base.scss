@@ -1,15 +1,4 @@
 @import '_variable.scss';
-.app-theme{
-  // these are default colors, which be used in development mode and in production mode if get-theme failed
-  --bg-color: #ffffff;
-  --text-color: #1f1f1f;
-  --text-primary: #005abd;
-  --text-secondary: #97c6f8;
-  --btn-primary: #4646f1;
-  --btn-primary-text: #ffffff;
-  --btn-secondary: #e2e9ff;
-  --btn-secondary-text: #2f2fe4;
-}
 
 .background-color {
   background-color: $bg-color;

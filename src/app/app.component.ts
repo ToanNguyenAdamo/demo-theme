@@ -18,11 +18,11 @@ export class AppComponent {
   constructor(private themeService: ThemeService) {}
 
   ngOnInit() {
-      // this.initialApp = false;
-
-    this.lightTheme().subscribe((res) => {
       this.initialApp = false;
-    });
+
+    // this.lightTheme().subscribe((res) => {
+    //   this.initialApp = false;
+    // });
   }
 
   currentThemeChange() {
